@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lica iza kovanica: Priče o obveznim mirovinskim fondovima</title>
+    <meta name="description" content="Osobne priče o mirovinskim stupovima u Hrvatskoj — saznajte kako Martina, Tihomir i Zvjezdana planiraju budućnost kroz rad, mirovinu i životne odluke.">
+    <meta property="og:description" content="Upoznajte stvarne ljude iza hrvatskih mirovinskih stupova — Martina s Hvara, Tihomir iz Zeline i Zvjezdana iz Daruvara dijele svoje životne priče o radu, mirovini i planiranju budućnosti.">
+    <meta name="keywords" content="mirovinski stupovi, obvezni mirovinski fond,  Hrvatska, planiranje budućnosti, poduzetnica, serviser, Hvar, Zelina, Daruvar, osobne priče">
+    <meta name="author" content="Feđa Kulenović">
+    <link rel="shortcut icon" href="images/nikasrebro.png" type="image/x-icon">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!--<link rel="preconnect" href="https://fonts.googleapis.com">-->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%; /* Ensure html and body take full height */
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+           background: linear-gradient(180deg,rgba(149, 154, 166, 1) 0%, rgba(190, 204, 215, 1) 30%);
+            color: #fff;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        /* Set initial state for the main title for animation */
+        .main-title {
+            opacity: 0;
+            transform: translateY(-50px);
+        }
+
+        /* Set initial state for photo cards for animation */
+            .photo-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0; /* Removed rounded corners */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Retained shadow */
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            min-height: 400px; /* Ensure a minimum height for the cards */
+            background-color: #e0e0e0; /* Fallback background for the card area */
+            flex-grow: 1; /* Allow cards to grow and fill available space */
+
+            /* Initial state before animation */
+            opacity: 0;
+            transform: translateY(50px);
+            }
+        .photo-card:hover {
+            transform: translateY(-8px); /* Subtle lift effect */
+            }
+        .photo-card img {
+            width: 100%;
+            height: 100%; /* Make image fill the card */
+            object-fit: cover;
+            position: absolute; /* Position image behind text */
+            top: 0;
+            left: 0;
+            z-index: 1; /* Place image below text overlay */
+            transition: transform 0.3s ease-in-out;
+        }
+        .photo-card:hover img {
+            transform: scale(1.05); /* Zoom effect on hover */
+        }
+        .text-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem; /* p-6 */
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+            color: white;
+            z-index: 2; /* Place text overlay above image */
+        }
+        .text-overlay h1 {
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700; /* font-bold */
+            margin-bottom: 0.5rem;
+        }
+        .text-overlay p {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 400; /* font-normal */
+            opacity: 0.9;
+        }
+        /* Popover/Tooltip styles */
+        .popover-container {
+            position: relative;
+            display: inline-block; /* Allows the container to wrap the button */
+        }
+        .popover-content {
+            visibility: hidden;
+            opacity: 0;
+            width: 200px; /* Adjust width as needed */
+            background-color: #8f0505;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px 0;
+            position: absolute;
+            z-index: 10;
+            top: 125%; /* Position below the button */
+            left: 50%;
+            margin-left: -100px; /* Center the popover */
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .popover-container:hover .popover-content {
+            visibility: visible;
+            opacity: 1;
+        }
+        /* Popover arrow */
+        .popover-content::after {
+            content: "";
+            position: absolute;
+            bottom: 100%; /* At the top of the popover */
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent #333 transparent; /* Arrow pointing up */
+        }
+
+        .nika{
+            max-width: 15%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .golub{
+            color:linear-gradient(90deg,rgba(226, 194, 63, 1) 0%, rgba(241, 224, 105, 1) 46%, rgba(178, 140, 33, 1) 98%);
+         
+  /* 1. Apply the gradient as a background image */
+  background-image: linear-gradient(90deg, rgba(234, 233, 226,1) 10%,  rgb(220,220, 220) 50%, rgba(217, 214, 208,1) 100%);
+
+  
+  
+  /* 2. Clip the background image to the shape of the text */
+  -webkit-background-clip: text;
+  background-clip: text; /* Standard property for future compatibility */
+  
+  /* 3. Make the text transparent so the background shows through */
+  -webkit-text-fill-color: transparent;
+  
+  /* 4. Optional: Set a plain color fallback */
+  color: #eae9e2; 
+  
+  /* To ensure the gradient works, you might also want to set display: inline-block or a font-size */
+  
+}
+
+        .momenat {
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .column-wrapper {
+                flex-direction: column;
+            }
+            .photo-card {
+                width: 100%; /* Make cards full width on small screens */
+                margin-bottom: 0; /* Remove space between cards on small screens */
+            }
+              .popover-content {
+                width: 90%; /* Adjust width for mobile */
+                margin-left: -45%; /* Re-center for mobile */
+                left: 50%;
+            }
+
+             .nika{
+            max-width: 40%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+    .momenat {
+    margin-bottom: 0rem;
+    margin-top: 2rem;
+}
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="min-h-screen flex flex-col items-center justify-center w-full">
+        <!-- Added 'main-title' class for animation -->
+      
+         <div class="flex flex-col items-center justify-center w-full">
+    <div class="column-wrapper flex flex-col md:flex-row justify-stretch items-center md:items-stretch w-full">
+        
+        <h1 class="main-title text-5xl md:text-6xl font-extrabold text-center momenat leading-tight px-4 golub w-full md:w-2/3 flex items-center justify-center">
+           PRIČE LICA IZA KOVANICA
+        </h1>
+        
+        <img class="w-full md:w-1/3 object-cover nika" src="images/nikasrebro.png" alt="ilustracija">
+    </div>
+</div>
+        
+    
+        <!-- This wrapper now spans full width and contains the photo cards -->
+        <div class="column-wrapper flex flex-col md:flex-row justify-stretch items-stretch md:items-stretch w-full">
+
+            <!-- Column 1 -->
+            <a href="final/martina.html" class="photo-card w-full md:w-1/3" id="card1">
+                <img src="images/martina.JPG" alt="Portrait of a person" class="w-full h-full object-cover">
+                <div class="text-overlay">
+                    <h1 class="text-3xl font-bold">Planiranje budućnosti</h1>
+                    <p class="text-lg font-normal">Martina (33), poduzetnica s Hvara</p>
+                </div>
+            </a>
+
+            <!-- Column 2 -->
+            <a href="final/tihomir.html" class="photo-card w-full md:w-1/3" id="card2">
+                <img src="images/tihomirruke.JPG" alt="Portrait of another person" class="w-full h-full object-cover">
+                <div class="text-overlay">
+                    <h1 class="text-3xl font-bold">Budući horizonti</h1>
+                    <p class="text-lg font-normal">Tihomir (46), serviser iz Zeline</p>
+                </div>
+            </a>
+
+            <!-- Column 3 -->
+            <a href="final/zvjezdana.html" class="photo-card w-full md:w-1/3" id="card3">
+                <!--<video autoplay muted>
+  <source src="images/zvjezdana11.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>-->
+                <img src="images/zvjezdana_stoji.JPG" alt="Zvjezdana iz Daruvara" class="w-full h-full object-cover">
+                <div class="text-overlay">
+                    <h1 class="text-3xl font-bold">Eho prošlih odluka</h1>
+                    <p class="text-lg font-normal">Zvjezdana (58), dentalna tehničarka iz Daruvara</p>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+
+    <script>
+        // Register ScrollTrigger plugin
+        gsap.registerPlugin(ScrollTrigger);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // GSAP animation for the main title - changed to .to()
+            gsap.to(".main-title", {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power3.out",
+                delay: 0.5
+            });
+
+            // GSAP animation for each photo card - changed to .to()
+            gsap.utils.toArray(".photo-card").forEach((card, i) => {
+                gsap.to(card, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power3.out",
+                    delay: 0.2 + (i * 0.2), // Stagger the animation
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 85%", // Start animation when card is 85% from the top
+                        toggleActions: "play none none none", // Play animation once
+                    }
+                });
+            });
+
+            // Optional: Add a subtle parallax effect to the background on scroll
+            gsap.to("body", {
+                backgroundPosition: "50% 100%",
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "body",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+        });
+    </script>
+</body>
+</html>
