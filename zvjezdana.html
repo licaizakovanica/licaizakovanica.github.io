@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zvjezdanina priča: Eho prošlih odluka</title>
+    <meta name="description" content="Zvjezdana otkriva važnost drugog mirovinskog stupa kao osobne kapitalizirane štednje i uči kako njezina ulaganja oblikuju budućnost kroz fondove.">
+    <meta name="keywords" content="drugi stup mirovinskog osiguranja, Hrvatska, obvezni mirovnski fond">
+    <meta name="author" content="Feđa Kulenović (dizajn)">
+    <link rel="shortcut icon" href="images/nikasrebro.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #fff; /* Default background */
+        }
+
+        /* --- Scrollytelling Container --- */
+        /* This holds the two layers: graphics on the left, text on the right */
+        .scrolly-container {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr; /* Single column on mobile */
+        }
+
+        /* --- Graphics Layer (The "Filmstrip") --- */
+        /* This element will stick to the screen */
+        .scrolly-graphics {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden; /* Acts as the "window" for the filmstrip */
+        }
+        
+        /* Each individual background graphic */
+        .scrolly-graphic {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* --- Text/Steps Layer --- */
+        /* This is the column that the user actually scrolls through */
+        .scrolly-steps {
+            position: relative;
+            z-index: 10;
+            padding: 10vh 2rem; /* Give space at top and bottom */
+        }
+
+        /* Individual text panel */
+        .step {
+            min-height: 40vh; /* This provides the scrolling distance */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20vh;
+        }
+
+        .step-content {
+            background-color: rgba(123, 114, 114, 0.9);
+            color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            max-width: 500px;
+            text-align: center;
+            transition: background-color 0.3s;
+            
+           /* margin-bottom: 20vh;*/
+        }
+        
+        /* Highlight the active text panel */
+        .step.active .step-content {
+            background-color: rgba(123, 114, 114, 0.9);
+        }
+
+        .step-content p {
+            font-size: 1.25rem;
+            line-height: 1.7;
+        }
+
+        /* --- Standard Content Section --- */
+        .standard-section {
+            background-color: #f7fafc;
+            color: #2d3748;
+            padding: 4rem 2rem;
+        }
+        .standard-section-content {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .pozadina{ 
+                 background-color: rgba(0, 0, 0, 0.5);
+                 max-width: 800px;
+                 padding: 2rem;
+                text-align: center;
+            }
+
+        .step.active #graphic1{
+            overflow-x: visible;
+            transform: translateX(-100px);
+        }    
+
+
+
+        /* --- ADD THESE RULES FOR CUSTOM BACKGROUND POSITIONS --- */
+        /* Use these to adjust the horizontal alignment of your background images. */
+        /* 0% is the far left, 50% is center, 100% is the far right. */
+
+        /* This pans the image for #graphic1 to show more of its left side. */
+        #graphic1 {
+             background-position: 75% center; /* Adjust 25% to fine-tune */
+        }
+
+        /* This pans the image for #graphic2 to show more of its right side. */
+        #graphic2 {
+            background-position: 55% center; /* Adjust 75% to fine-tune */
+        }
+
+        #graphic7{
+            background-position: 80% center; /* Adjust 75% to fine-tune */
+        }
+
+        #graphic51 {
+            background-position: 72% center; /* Adjust 75% to fine-tune */
+        }
+
+        #graphic8 {
+            background-position: 34% center; /* Adjust 75% to fine-tune */
+        }
+
+footer {
+  text-align: center;
+  padding: 2rem;
+   background: linear-gradient(180deg,rgba(149, 154, 166, 1) 0%, rgba(190, 204, 215, 1) 30%);
+  color: silver;
+}
+
+.zuto{
+  color: gray;
+  font-weight: 700;
+  border-left: gray 5px solid;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+  padding-left: 15px;
+  margin-bottom: 1rem;
+  max-width: 800px;
+  align-items: center;
+  text-align: left;
+
+}
+
+.golub{
+            color:linear-gradient(90deg,rgba(226, 194, 63, 1) 0%, rgba(241, 224, 105, 1) 46%, rgba(178, 140, 33, 1) 98%);
+         
+  /* 1. Apply the gradient as a background image */
+  background-image: linear-gradient(90deg, rgba(234, 233, 226,1) 10%,  rgb(220,220, 220) 50%, rgba(217, 214, 208,1) 100%);
+
+  
+  
+  /* 2. Clip the background image to the shape of the text */
+  -webkit-background-clip: text;
+  background-clip: text; /* Standard property for future compatibility */
+  
+  /* 3. Make the text transparent so the background shows through */
+  -webkit-text-fill-color: transparent;
+  
+  /* 4. Optional: Set a plain color fallback */
+  color: #eae9e2; 
+  
+  /* To ensure the gradient works, you might also want to set display: inline-block or a font-size */
+  
+}
+/*PHOTO CARDS*/
+ /* Set initial state for photo cards for animation */
+            .photo-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0; /* Removed rounded corners */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Retained shadow */
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            min-height: 400px; /* Ensure a minimum height for the cards */
+            background-color: #e0e0e0; /* Fallback background for the card area */
+            flex-grow: 1; /* Allow cards to grow and fill available space */
+
+            /* Initial state before animation */
+            opacity: 0;
+            transform: translateY(50px);
+            }
+        .photo-card:hover {
+            transform: translateY(-8px); /* Subtle lift effect */
+            }
+        .photo-card img {
+            width: 100%;
+            height: 100%; /* Make image fill the card */
+            object-fit: cover;
+            position: absolute; /* Position image behind text */
+            top: 0;
+            left: 0;
+            z-index: 1; /* Place image below text overlay */
+            transition: transform 0.3s ease-in-out;
+        }
+        .photo-card:hover img {
+            transform: scale(1.05); /* Zoom effect on hover */
+        }
+        .text-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem; /* p-6 */
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+            color: white;
+            z-index: 2; /* Place text overlay above image */
+        }
+        .text-overlay h1 {
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700; /* font-bold */
+            margin-bottom: 0.5rem;
+        }
+        .text-overlay p {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 400; /* font-normal */
+            opacity: 0.9;
+        }
+        
+        /* You can add more rules here for #graphic3, #graphic4, etc. */
+        .nika {
+            width:60%;
+        }
+
+        .crveno{
+            color: #e01e26 ;
+        }
+
+        .plavo{
+            color:#143a69 ;
+        }
+
+        /* --- Desktop Layout --- */
+        @media (min-width: 768px) {
+            .scrolly-container {
+                grid-template-columns: 1fr 1fr; /* Two columns on desktop */
+            }
+            /* On desktop, the layers are placed in the same grid cell to overlap */
+            .scrolly-graphics, .scrolly-steps {
+                grid-column: 1 / -1; /* Span the full grid width */
+                grid-row: 1 / -1;    /* Span the full grid height */
+            }
+             /* The graphics container now takes up the full screen height */
+            .scrolly-graphics {
+                height: 100vh;
+            }
+
+            .step {
+                min-height: 200vh; /* Give more scrolling room on desktop */
+            }
+            .pozadina{ 
+                 background-color: rgba(123, 114, 114, 0.9);
+                 max-width: 800px;
+                text-align: center;
+                padding: 2rem;
+                border-radius: none;
+            }
+
+             .step-content {
+            background-color: rgba(123, 114, 114, 0.9);
+            color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            max-width: 800px;
+            text-align: center;
+            transition: background-color 0.3s;
+            margin-top: 10vh;
+            margin-bottom: 20vh;
+        }
+
+       .nika {
+            width:35%;
+        }
+
+        }
+        
+        /* --- Footer Animation --- */
+        #footer-heading, #footer-image-container {
+            opacity: 0;
+        }
+        
+        #footer-image-container {
+            transform: perspective(800px) rotateY(-90deg);
+        }
+        
+        #footer-heading {
+            transform: translateY(40px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Section 1: Title Section (Video) -->
+    <section class="relative h-screen w-full overflow-hidden flex flex-col justify-end items-center">
+        <video id="background-video" class="absolute top-0 left-0 w-full h-full object-cover" autoplay muted playsinline>
+            <source src="images/zvjezdana720.mp4" type="video/mp4">
+        </video>
+        <div class="relative z-10 text-center mb-16">
+            <h1 class="text-white text-5xl md:text-6xl font-bold rounded-lg p-4">EHO PROŠLIH ODLUKA</h1>
+            <h2 class="text-white text-3xl font-bold rounded-lg p-4">S iskustvom u akciju i pripreme za mirovinu</h2>
+        </div>
+    </section>
+
+    <!-- First Scrollytelling Sequence -->
+    <div class="scrolly-container">
+        <!-- The Graphics Layer (Backgrounds) -->
+        <div class="scrolly-graphics">
+            <!-- These are the background images that will be revealed -->
+            <div class="scrolly-graphic" id="graphic1" style="background-image: url('images/opcije_zvjezdana.webp');"></div>
+            <div class="scrolly-graphic" id="graphic2" style="background-image: url('images/zvjezdana-zapisuje.JPG');"></div>
+        </div>
+        <!-- The Steps Layer (Text) -->
+        <div class="scrolly-steps">
+            <!-- Step 1 Text -->
+            <div class="step" data-step-for="graphic1">
+                <div class="step-content">
+                    <p class="text-white text-xl md:text-2xl md:text-2xl mb-4">Zvjezdana je posjetu jednom od društava za upravljanje obveznim mirovinskim fondovima (OMF-ovima) pristupila, reklo bi se - štreberski. „Mislim da ja previše pričam pa će mi kćerka poslije reći, mama stvarno si...“, smije se Zvjezdana pa nastavlja s pričom.</p>
+                    <p class="text-white text-xl md:text-2xl md:text-2xl m-4">Pozorno je slušala stručnjakinje i svako toliko zaustavljala priču: „Možete li sporije da mi zapamtimo?“ One su joj ilustrativnim primjerima objašnjavale što se događa s njezinom imovinom u drugom mirovinskom stupu i kakav je put čeka do mirovine.</p>
+                    <p class="text-white text-xl md:text-2xl md:text-2xl m-4">Većina ljudi to razdoblje života doživljava kao vrijeme kada kreće opuštanje i uživanje u plodovima minulog rada. No, rođena Daruvarčanka zna da je mirovina iza ugla i gleda na nju drugačije.</p>
+                    <p class="text-white text-xl md:text-2xl md:text-2xl m-4"> „Dok vidim na oči i dok mi mozak radi – radit ću“, kaže kroz smijeh.</p>
+                </div>
+            </div>
+
+            <div class="step" data-step-for="graphic2">
+                <div class="step-content">
+        <p class="text-white text-xl md:text-2xl mb-4">Sa suprugom Borisom vodi fotografski studio, po struci je dentalna tehničarka.</p>
+        <p class="text-white text-xl md:text-2xl m-4">„Nešto sam malo radila u Rijeci. To su bili trenutci kada u Daruvaru nije bilo dovoljno posla za mene, kći Tea je studirala, pa sam radila da ne bih sjedila i da nešto i zaradim“, prisjeća se tih vremena.</p>
+        <p class="text-white text-xl md:text-2xl m-4">I danas traži dodatne poslove, jer angažmana za fotografiranje malo ima - malo nema. „Kad bi barem bilo malo više toga u kontinuitetu, a da ne pričam da sam se prijavljivala na razne natječaje, no nisu me htjeli primiti jer, kako su rekli, imam previše godina“, dodaje.</p>
+        <p class="text-white text-xl md:text-2xl m-4">Ali ništa je to nije smelo da gura naprijed! Sa svojih 58 godina uči njemački, nedavno je završila tečaj web dizajna i vjeruje u cjeloživotno obrazovanje.</p>
+        <p class="text-white text-xl md:text-2xl m-4">Djeci uvijek govori: „Učite i radite. Diploma nije kraj nego početak.“ A za nju, novi početak bit će dan kad ostvari uvjete za odlazak u mirovinu.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Standard Content Section -->
+    <section class="standard-section">
+        <div class="standard-section-content">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-800">Koje su Zvjezdanine opcije?</h2>
+      <h3  class="text-2xl md:text-3xl font-bold mb-6 text-gray-800">Isplata mirovine iz 1. stupa obveznog mirovinskog osiguranja</h3>
+      <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">
+          U 1. stup uplaćuje 15% bruto plaće kako bi se isplaćivale mirovine sadašnjim umirovljenicima, a za nekoliko godina i njoj. Uplaćuje i 5% bruto plaće u obvezni drugi mirovinski stup.</p>
+       </div>
+      <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">Odabere li isplatu mirovine samo iz prvoga stupa, sredstva s osobnog računa u drugom stupu prenose se u državni proračun. Mirovinu će tako u cijelosti isplaćivati HZMO.</p>
+      </div>
+      <h3  class="text-2xl md:text-3xl font-bold mb-6 text-gray-800">Isplata kombinirane mirovine iz 1. i 2. stupa obveznog mirovinskog osiguranja</h3>
+      <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">
+       Osnovnu mirovinu iz prvog stupa isplaćivat će HZMO. Sredstva s osobnog računa u drugom stupu prenose se u izabrano mirovinsko osiguravajuće društvo, koje onda isplaćuje dio mirovine.</p>
+      </div>
+      <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">
+      Kod kombinirane opcije, postoji mogućnost korištenja djelomične jednokratne novčane isplate do najviše 20% ušteđenih sredstava na osobnom računu u drugom stupu, ukoliko je osnovna mirovina viša od iznosa najniže mirovine iz prvog stupa.</p>
+        </div>
+    </section>
+    
+    <!-- Second Scrollytelling Sequence -->
+    <div class="scrolly-container">
+        <!-- The Graphics Layer (Backgrounds) -->
+        <div class="scrolly-graphics">
+            <!-- These are the background images that will be revealed -->
+            <div class="scrolly-graphic" id="graphic3" style="background-image: url('images/zvjezdanaikcer.JPG');"></div>
+          </div>
+        <!-- The Steps Layer (Text) -->
+        <div class="scrolly-steps">
+            <!-- Step 2 Text -->
+            <div class="step" data-step-for="graphic3">
+                <div class="step-content">
+       <p class="text-white text-xl md:text-2xl m-4">Ponukane radionicom, Zvjezdana i Tea su, po povratku u Daruvar, u priču uvukle i tatu. Putem portala e-Građani, provjerili su koliko ima do mirovine i koliko bi iznosila prema informativnom izračunu. Sreća da su to napravili jer su došli do važnog podatka.</p>
+      <p class="text-white text-xl md:text-2xl m-4">„Malo smo to proučavali i vidjeli da mu nije upisan staž koji ima iz druge države. Sad to još treba rješavati pred mirovinu“, kaže Tea.</p>
+    
+      <p class="text-white text-xl md:text-2xl m-4">Treba prevenirati takva iznenađenja redovitim provjerama godina staža, uplata doprinosa svojih poslodavaca, kao i jesu li svi osobni podaci ažurirani.</p>
+      
+     <p class="text-white text-xl md:text-2xl m-4">Takav vid kontrole itekako se preporuča, ma koliko godina bilo do mirovine. No, pred sam početak mirovine, kreće akcija - treba znati što i kojim redom činiti.</p>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Standard Content Section -->
+    <section class="standard-section">
+        <div class="standard-section-content">
+       <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-800">Od zahtjeva do prve isplate mirovine</h2>
+    <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">
+        Najranije mjesec dana prije prestanka mirovinskog osiguranja, Zvjezdana može HZMO-u predati zahtjev za ostvarivanje prava na starosnu ili prijevremenu starosnu mirovinu.</p>
+      </div>
+      <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">
+       Kada utvrde da je sve ispravno, dobit će privremeno rješenje o priznavanju prava na mirovinu i isplati predujma do konačnog rješenja.</p>
+      </div>
+      <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">
+      Središnji registar osiguranika (REGOS) zatim kreće prikupljati informativne izračune Zvjezdanine mirovine od HZMO-a i mirovinskih osiguravajućih društava.</p>
+      </div>
+      <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">
+       Na kućnu adresu zaprimit će informativni izračun mirovine samo iz prvog stupa te kombinirane iz prvog i drugog. Na osnovu toga donijet će svoju konačnu odluku i predati izjavu REGOS-u.</p>
+      </div>
+    </div>
+    </section>
+
+     <!-- Section 1: Podnaslov -->
+      <div class="scrolly-container">
+        <!-- The Graphics Layer (Backgrounds) -->
+        <div class="scrolly-graphics">
+            <!-- These are the background images that will be revealed -->
+            <div class="scrolly-graphic" id="graphic3" style="background-image: url('images/zvjezdana-otkriva.jpg');"></div>
+          </div>
+        <!-- The Steps Layer (Text) -->
+        <div class="scrolly-steps">
+            <!-- Step 2 Text -->
+            <div class="step" data-step-for="graphic3">
+                <div class="step-content">
+       <h1 class="text-white text-5xl md:text-6xl font-bold rounded-lg p-4">DRUGI STUP IZ PRVE RUKE</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Second Scrollytelling Sequence -->
+    <div class="scrolly-container">
+        <!-- The Graphics Layer (Backgrounds) -->
+        <div class="scrolly-graphics">
+            <!-- These are the background images that will be revealed -->
+            
+            <div class="scrolly-graphic" id="graphic4" style="background-image: url('images/zvjezdana-gledagore.JPG');"></div>
+          </div>
+        <!-- The Steps Layer (Text) -->
+        <div class="scrolly-steps">
+            <!-- Step 2 Text -->
+            <div class="step" data-step-for="graphic4">
+                <div class="step-content">
+       <p class="text-white text-xl md:text-2xl m-4">U drugom stupu obveznog mirovinskog osiguranja Zvjezdanin je novac, njezina je to imovina na osobnom računu, štednja za „stare dane“, odnosno njezina individualna kapitalizirana štednja.</p>
+      <p class="text-white text-xl md:text-2xl m-4">Individualna - jer je riječ o Zvjezdaninoj osobnoj imovini, odnosno uplaćenim mirovinskim doprinosima koji se tijekom radnog vijeka prikupljaju na njezinom osobnom računu.</p>
+      <p class="text-white text-xl md:text-2xl m-4">Kapitalizirana - zato što taj novac ne „sjedi“ samo na osobnom računu, već se ulaganjima tih sredstava nastoji ostvariti prinos, odnosno zarada. A ostvareni prinos utječe na vrijednost štednje u fondu.</p>
+      <p class="text-white text-xl md:text-2xl m-4">Ako nije do sada, krajnje je vrijeme da se raspita o stanju svog računa. Sredstva iz drugog stupa namijenjena su isključivo za isplatu mirovine, čija će visina ponajprije ovisiti o iznosu uplaćenih i kapitaliziranih sredstava, ali i o vrsti i obliku odabrane mirovine.</p>
+      <p class="text-white text-xl md:text-2xl m-4">„Htjela bih vidjeti što možemo i sva ta naša prava...“, Zvjezdana ovime pogađa u metu!</p>
+                    </div>
+            </div>
+        </div>
+    </div>
+<!-- Tvoje pravo na propitkivanje-->
+    <section class="standard-section">
+        <div class="standard-section-content">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-800">Tvoje pravo na propitkivanje – što je s mojim osobnim računom?</h2>
+    <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">
+      Stanje računa može se provjeriti besplatnim pozivom na info telefon ili na mrežnim stranicama društva uz identifikaciju PIN-om ili korisničkim brojem, a također i putem aplikacije.</p>
+      </div>
+      <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">
+    Redovna izvješća stižu mailom, SMS-om ili poštom – prema vlastitom odabiru.</p>
+    </div>
+     <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">
+    Račun se vodi u obračunskim jedinicama, a zbroj vrijednosti svih obračunskih jedinica na računima svih članova obveznog mirovinskog fonda predstavlja ukupnu vrijednost fonda.</p>
+    </div>
+    </div>
+    </section>
+     <!-- Zadatak OMF-ova -->
+    <div class="scrolly-container">
+        <!-- The Graphics Layer (Backgrounds) -->
+        <div class="scrolly-graphics">
+            <!-- These are the background images that will be revealed -->
+            <div class="scrolly-graphic" id="graphic6" style="background-image: url('images/zvjezdana-pise.png');"></div>
+          </div>
+        <!-- The Steps Layer (Text) -->
+        <div class="scrolly-steps">
+            <!-- Step 2 Text -->
+            <div class="step" data-step-for="graphic6">
+                <div class="step-content">
+       <p class="text-white text-xl md:text-2xl m-4">Zadatak OMF-ova je da sredstva s osobnih računa članova ulažu, sačuvaju i oplemene, tražeći dobre prilike za ulaganje na tržištima kapitala.</p>
+       <p class="text-white text-xl md:text-2xl m-4">Kroz takva ulaganja, članovi mirovinskih fondova, između ostalog, posredno sudjeluju i u razvoju tema budućnosti – od umjetne inteligencije i zdravstvene skrbi do zelene energije, digitalizacije i novih tehnologija. Njihov novac tako ne služi samo štednji, nego i poticanju promjena koje oblikuju buduće društvo.</p>
+       <p class="text-white text-xl md:text-2xl m-4">Zvjezdana je zbrojila dva i dva – njezin novac, koji je uplaćivan u drugi stup, fond ulaže primjerice u dionice – dakle, i ona je posredno ulagačica u domaće i svjetske kompanije!</p>
+       <p class="text-white text-xl md:text-2xl m-4">Vrijednost dionica, odnosno vrijednosnih papira, može oscilirati pa je tim važnije opravdati povjerenje koje članovi daju društvima za upravljanje OMF-ima. To je velika odgovornost.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Tvoje pravo na propitkivanje-->
+    <section class="standard-section">
+        <div class="standard-section-content">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-800">Tvoje pravo na transparentnost – ulaganja mog OMF-a</h2>
+    <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">
+      OMF-ovi rade u strogo zacrtanim zakonskim okvirima, propisano je što smiju, što ne. Pa tako moraju diversificirati ulaganja s ciljem zaštite imovine. Popis svih ulaganja objavljuje se na mrežnim stranicama svih društava dva puta godišnje, a struktura ulaganja jednom mjesečno.</p>
+      </div>
+      <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">
+     Hrvatska agencija za nadzor financijskih usluga (HANFA) samostalni je i neovisni regulator koji nadzire i rad mirovinskih društava. Kontrolira njihova ulaganja i provjerava jesu li transakcije u skladu sa zakonom, a redovito objavljuje mjesečna, kvartalna i godišnja izvješća na svojim mrežnim stranicama.</p>
+    </div>
+    </div>
+    </section>
+     
+     <!-- Second Scrollytelling Sequence -->
+    <div class="scrolly-container">
+        <!-- The Graphics Layer (Backgrounds) -->
+        <div class="scrolly-graphics">
+            <!-- These are the background images that will be revealed -->
+            
+            <div class="scrolly-graphic" id="graphic5" style="background-image: url('images/zgleda_sm.jpg');"></div>
+          </div>
+        <!-- The Steps Layer (Text) -->
+        <div class="scrolly-steps">
+            <!-- Step 2 Text -->
+            <div class="step" data-step-for="graphic5">
+                <div class="step-content">
+      <p class="text-white text-xl md:text-2xl m-4">Zvjezdana ulazi sve dublje u tematiku. Ako to nije radila ranije - krajnje je i vrijeme: „Moram si to malo posložiti, proučiti oko mirovina, jer sutra će doći…vrlo brzo!“</p>
+      <p class="text-white text-xl md:text-2xl m-4">Od četiri društva za upravljanje OMF-ovima, zna čiji je član. No, nije bila upoznata s kategorijama obveznih mirovinskih fondova.</p>
+      <p class="text-white text-xl md:text-2xl m-4">Informacije o kategoriji fonda članovi mogu dobiti izravno od svojega društva, a dodatne adrese za informiranje su REGOS i sustav e-Građani.</p>  
+      <p class="text-white text-xl md:text-2xl m-4">Za stolom Zvjezdani pomaže kćer Tea pa istraga može započeti: „Mama, tu ti piše u kojem si fondu i u kojoj si kategoriji“. Tako Zvjezdana saznaje da je u kategoriji B te priznaje: „Nisam znala da postoje tri kategorije - A, B i C. Sve to tek sad učim.“</p>
+      <p class="text-white text-xl md:text-2xl m-4">Kategorije se razlikuju po investicijskoj strategiji, rizicima i uvjetima članstva ovisno o vremenu do referentnog dana, odnosno dana kada se stječe pravo odlaska u starosnu mirovinu.</p>
+     <p class="text-white text-xl md:text-2xl m-4">Kao osoba koja se bavi fotografijom i koja je vizualan tip, Zvjezdana voli ilustrirati stvari. Tako su se na papiru iscrtavale kategorije te povezivalo kakve one imaju veze s ulaganjima.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <!-- Tvoje pravo da znas -->
+    <section class="standard-section">
+        <div class="standard-section-content">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-800">Tvoje pravo da znaš – koji su rizici i limiti?</h2>
+      <h3  class="text-2xl md:text-3xl font-bold mb-6 text-gray-800">A kategorija</h3>
+      <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">
+       Rizičnija jer se više ulaže u dionice nego npr. u obveznice. Dugoročno može donijeti veći očekivani prinos, ali i veće oscilacije vrijednosti. U dionice je dozvoljeno ulagati do najviše 70% neto vrijednosti imovine fonda.</p>
+      </div>
+      <h3  class="text-2xl md:text-3xl font-bold mb-6 text-gray-800">B kategorija</h3>
+      <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">
+       Umjerenog rizika zbog umjerenije investicijske strategije, pa stoga i dugoročno umjerenijim očekivanim prinosima. U dionice je dozvoljeno ulagati do najviše 40% neto vrijednosti imovine fonda.</p>
+      </div>
+			<h3  class="text-2xl md:text-3xl font-bold mb-6 text-gray-800">C kategorija</h3>
+      <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">
+       Najmanji rizik, ali i s nižim očekivanim prinosima u dužem roku jer se imovina pretežito ulaže u niskorizična ulaganja, npr. u obveznice ili depozite. Ulaganje u dionice je vrlo ograničeno - najviše do 10% neto vrijednosti imovine fonda, i to isključivo u visokolikvidne dionice.</p>
+      </div>
+    </div>
+    </div>
+    </section>
+
+    <!-- OMF-ovi -->
+    <div class="scrolly-container">
+        <!-- The Graphics Layer (Backgrounds) -->
+        <div class="scrolly-graphics">
+            <!-- These are the background images that will be revealed -->
+            
+            <div class="scrolly-graphic" id="graphic51" style="background-image: url('images/zvjezdana-gleda.jpg');"></div>
+          </div>
+        <!-- The Steps Layer (Text) -->
+        <div class="scrolly-steps">
+            <!-- Step 2 Text -->
+            <div class="step" data-step-for="graphic51">
+                <div class="step-content">
+     <p class="text-white text-xl md:text-2xl m-4">Član može ostati u fondu kategorije A ako mu je do referentnog dana ostalo 10 ili više godina. Iznimno, na temelju osobnog zahtjeva, može i dalje ostati u kategoriji A ako mu je do referentnog dana ostalo 5 ili više godina, a nakon tog roka REGOS će ga rasporediti u fond kategorije B kojim upravlja isto mirovinsko društvo.</p>
+   
+      <p class="text-white text-xl md:text-2xl m-4">U kategoriji B, isto kao i u kategoriji C, član može biti neovisno o duljini vremenskog razdoblja do referentnog dana, odnosno dana ispunjenja uvjeta za starosnu mirovinu.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="standard-section">
+        <div class="standard-section-content">
+      <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-800">Tvoje pravo na odabir – želim taj fond i tu kategoriju!</h2>
+      <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">
+       Ima se pravo samostalno odabrati društvo za upravljanje OMF-om, kao i kategoriju A, B ili C.</p>
+      </div>
+      <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">
+      Navedeni odabir može se napraviti na šalteru REGOS-a u poslovnicama FINA-e, u Mirovinskim informativnim centrima i putem sustava e-Građani.</p>
+      </div>
+      <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">
+        Društvo se može mijenjati u prve tri godine članstva s naknadom, a nakon treće godine bez naknade.</p>
+      </div>
+      <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">
+        Dozvoljeno je jednom godišnje unutar istog mirovinskog društva ili prelaskom u fond kojim upravlja drugo mirovinsko društvo prebaciti se iz jedne kategorije fonda u drugu.</p>
+      </div>
+      </div>
+    </div>
+    </div>
+    </section>
+
+     <!-- OMF-ovi -->
+    <div class="scrolly-container">
+        <!-- The Graphics Layer (Backgrounds) -->
+        <div class="scrolly-graphics">
+            <!-- These are the background images that will be revealed -->
+            
+            <div class="scrolly-graphic" id="graphic8" style="background-image: url('images/zvjezdana-nadesno.JPG');"></div>
+          </div>
+        <!-- The Steps Layer (Text) -->
+        <div class="scrolly-steps">
+            <!-- Step 2 Text -->
+            <div class="step" data-step-for="graphic8">
+                <div class="step-content">
+       <p class="text-white text-xl md:text-2xl m-4">Zvjezdana sad bolje razumije vrste kategorija, prednosti svake od njih, koji su rizici, u što se sredstva ulažu, zna i da je u kategoriji B, ali ne zna kako je tamo „završila“.</p>
+   
+      <p class="text-white text-xl md:text-2xl m-4">Saznaje da ju je, prema prethodnom Zakonu, REGOS automatizmom rasporedio u kategoriju B jer ranije nije samostalno odabrala ni društvo ni kategoriju.</p>
+    
+      <p class="text-white text-xl md:text-2xl m-4">Sadašnje pak novozaposlene osobe REGOS automatski raspoređuje u mirovinski fond kategorije A pod upravljanjem jednog od mirovinskih društava, ako se ne napravi odabir u roku od mjesec dana od prvog zaposlenja.   </p>
+      <p class="text-white text-xl md:text-2xl m-4">Uputa je to koju će dati drugoj kćeri Sari, koja upravo završava fakultet i čeka je prvi posao.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- BIJELA CJELINA SA OBJAŠNJENJIMA: Tvoje pravo na SIGURNOST  -->
+ <section class="standard-section">
+        <div class="standard-section-content">
+     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-800">Tvoje pravo na sigurnost – tvoj novac ne nestaje</h2>
+      <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">
+       Ostane li se bez posla, sredstva u drugom stupu ostaju na osobnom računu i dalje se kapitaliziraju.</p>
+      </div>
+      <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">
+       Sredstva na osobnom računu u obveznom mirovinskom fondu ne mogu biti predmet ovrhe.</p>
+      </div>
+      <div class="flex flex-col md:flex-row gap-8 mb-8">
+        <p class="text-gray-700 leading-relaxed text-lg md:text-xl md:w-3/3">
+       U slučaju da član obveznog mirovinskog fonda premine u radnoj dobi, a članovi obitelji nemaju pravo na obiteljsku mirovinu, REGOS nasljednicima isplaćuje mirovinsku štednju iz drugog stupa u cijelosti, prema rješenju o nasljeđivanju.</p>
+      </div>
+      </div>
+    </div>
+    </div>
+    </section>
+
+    <div class="scrolly-container">
+        <!-- The Graphics Layer (Backgrounds) -->
+        <div class="scrolly-graphics">
+            <!-- These are the background images that will be revealed -->
+            
+            <div class="scrolly-graphic" id="graphic7" style="background-image: url('images/zvjezda-neznam.JPG');"></div>
+          </div>
+        <!-- The Steps Layer (Text) -->
+        <div class="scrolly-steps">
+            <!-- Step 2 Text -->
+            <div class="step" data-step-for="graphic7">
+                <div class="step-content">
+       <p class="text-white text-xl md:text-2xl m-4">Kada se lekcije povežu, sve se svede na razumijevanje da su sredstva u drugom stupu njezina kapitalizirana štednja. Štedjeti se inače može i u trećem stupu, dobrovoljnom mirovinskom fondu, gdje se samostalno određuje koliko i kad se želi uplaćivati.</p>
+       <p class="text-white text-xl md:text-2xl m-4">Prava lica iza naših kovanica otvorila su vrata društva za upravljanje OMF-ovima - Zvjezdani i još dvoje polaznika radionice, Tihomiru i Martini.</p>
+       <p class="text-white text-xl md:text-2xl m-4">Na samome kraju, spremajući svoju bilježnicu gdje je pomno zapisivala svaku informaciju, dodala je: „Nisam zamišljala da će mi biti ovako zanimljivo, nisam znala da je sve toliko dostupno…baš mi je dalo motivaciju!“</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- You can add more .scrolly-container sections or .standard-section sections here -->
+<!--DRUGE PRIČE POČETAK FOOTERA-->
+<footer>
+<div class="column-wrapper flex flex-col md:flex-row items-center">
+    <div id="footer-image-container" class="md:w-1/3 p-4 flex justify-center">
+        <img class="nika" src="images/nikasrebro.png" alt="Nika Srebro" class="w-full max-w-xs">
+    </div>
+
+    <div class="md:w-3/3 p-4">
+        <h2 id="footer-heading" class="text-4xl font-bold rounded-lg p-4 text-gray-800 golub">PROČITAJTE DRUGE PRIČE LICA IZA KOVANICA</h2>
+    </div>
+</div>
+  <div class="column-wrapper flex flex-col md:flex-row justify-stretch items-stretch md:items-stretch w-full">
+            <!-- Column 1 -->
+            <a href="martina.html" class="photo-card w-full md:w-2/3" id="card1">
+                <img src="images/martina.JPG" alt="Portrait of a person" class="w-full h-full object-cover">
+                <div class="text-overlay">
+                    <h1 class="text-3xl font-bold">Planiranje budućnosti</h1>
+                    <p class="text-lg font-normal">Martina (33), poduzetnica s Hvara</p>
+                </div>
+            </a>
+
+            <!-- Column 2 -->
+            <a href="tihomir.html" class="photo-card w-full md:w-2/3" id="card2">
+                <img src="images/tihomirruke.JPG" alt="Portrait of another person" class="w-full h-full object-cover">
+                <div class="text-overlay">
+                    <h1 class="text-3xl font-bold">Budući horizonti</h1>
+                    <p class="text-lg font-normal">Tihomir (46), serviser iz Zeline</p>
+                </div>
+            </a>
+
+            
+
+    </div>
+    <div class="column-wrapper flex-col w-full mb-4">
+  <p class="zuto">U sklopu financijskog opismenjavanja sadržaj omogućava <span class="crveno">PBZ</span><span class="plavo"> CROATIA OSIGURANJE d.d.</span> za upravljanje obveznim mirovinskim fondovima</p>
+<p style="color: gray ;">Dizajn: F. Kulenović</p>
+</div>
+</footer>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // This function can be called for multiple scrollytelling sections if needed
+            function setupScrollytelling(containerSelector) {
+                const container = document.querySelector(containerSelector);
+                if (!container) return;
+
+                const steps = container.querySelectorAll(".step");
+                const graphics = container.querySelectorAll(".scrolly-graphic");
+
+                // --- 1. SET THE INITIAL STATE ---
+                
+                // First, hide ALL graphics in this section
+                gsap.set(graphics, { autoAlpha: 0 });
+                
+                // Then, instantly reveal only the FIRST graphic.
+                // This is what makes it appear before any scrolling.
+                if (graphics.length > 0) {
+                    gsap.set(graphics[0], { autoAlpha: 1 });
+                }
+
+                // --- 2. CREATE TRIGGERS FOR EACH STEP ---
+                
+                // We still create a trigger for every step, including the first one.
+                // The trigger for a step is responsible for making sure its corresponding graphic is visible.
+                steps.forEach((step, i) => {
+                    ScrollTrigger.create({
+                        trigger: step,
+                        start: "top 80%", // You can adjust this as we discussed
+                        
+                        // When a step is in the center, ensure its graphic is visible and others are not.
+                        onEnter: () => {
+                            // Animate all graphics: fade the target one IN, and all others OUT.
+                            gsap.to(graphics, { 
+                                autoAlpha: (j) => (j === i ? 1 : 0), // Ternary operator: if index matches, opacity is 1, else 0
+                                duration: 0.5 
+                            });
+                        },
+                        // Do the same when scrolling back up
+                        onEnterBack: () => {
+                            gsap.to(graphics, { 
+                                autoAlpha: (j) => (j === i ? 1 : 0),
+                                duration: 0.5
+                            });
+                        },
+                        
+                       toggleClass: { targets: step, className: "active" }
+                    });
+                });
+            }
+
+             document.querySelectorAll('.scrolly-container').forEach((container, index) => {
+                // Give each container a unique ID for robust targeting
+                const uniqueId = `scrolly-container-${index}`;
+                container.id = uniqueId;
+                setupScrollytelling(`#${uniqueId}`); 
+            });
+
+            // GSAP animation for the main title
+            gsap.from("h1", {
+                opacity: 0,
+                y: -50,
+                duration: 1,
+                ease: "power3.out",
+                delay: 0.5
+            });
+
+            // GSAP animation for each photo card - ADDED HERE
+            gsap.utils.toArray(".photo-card").forEach((card, i) => {
+                gsap.to(card, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "power3.out",
+                    delay: 0.2 + (i * 0.2), // Stagger the animation
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 85%", // Start animation when card is 85% from the top
+                        toggleActions: "play none none none", // Play animation once
+                    }
+                });
+            });
+
+            // Optional: Add a subtle parallax effect to the background on scroll
+            gsap.to("body", {
+                backgroundPosition: "50% 100%",
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "body",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+
+            // GSAP animation for footer elements
+            const footerImage = document.querySelector("#footer-image-container");
+            const footerHeading = document.querySelector("#footer-heading");
+            
+            gsap.set(footerImage, { opacity: 0, rotationY: -90 });
+            gsap.set(footerHeading, { opacity: 0, y: 40 });
+
+            ScrollTrigger.create({
+                trigger: "footer",
+                start: "top 85%",
+                end: "bottom 20%",
+                toggleActions: "play reverse play reverse",
+                onEnter: () => {
+                    gsap.to(footerImage, {
+                        opacity: 1,
+                        rotationY: 0,
+                        duration: 1.5,
+                        ease: "power3.out"
+                    });
+                    
+                    gsap.to(footerHeading, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1,
+                        ease: "power3.out",
+                        delay: 0.5 // Stagger the heading animation
+                    });
+                },
+                onLeaveBack: () => {
+                    gsap.to(footerImage, {
+                        opacity: 0,
+                        rotationY: -90,
+                        duration: 1.5,
+                        ease: "power3.out"
+                    });
+                    
+                    gsap.to(footerHeading, {
+                        opacity: 0,
+                        y: 40,
+                        duration: 1,
+                        ease: "power3.out"
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
